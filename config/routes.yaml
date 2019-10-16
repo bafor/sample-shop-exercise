@@ -1,3 +1,7 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+product_list:
+    path: /
+    controller: App\Controller\ProductList
+
+admin_add_product:
+    path: /admin/new-product
+    controller: App\Controller\Admin\AddProduct

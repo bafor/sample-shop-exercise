@@ -1,0 +1,20 @@
+App\Domain\Product\Product:
+    type: entity
+
+    table: shop_product
+    id:
+        id:
+            type: uuid
+    fields:
+        name:
+            type: string
+        description:
+            type: string
+            length: 2000
+        price:
+            type: integer
+        currency:
+            type: string
+            length: 5
+        createdAt:
+            type: datetime_immutable
