@@ -1,7 +1,7 @@
 product_list:
     path: /
-    controller: App\Controller\ProductList
+    controller: App\UserInterface\Product\ProductList
 
 admin_add_product:
     path: /admin/new-product
-    controller: App\Controller\Admin\AddProduct
+    controller: App\UserInterface\Admin\Product\AddProductAction
