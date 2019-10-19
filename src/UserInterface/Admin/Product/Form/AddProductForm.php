@@ -28,10 +28,12 @@ class AddProductForm extends BaseType
             ->add('description', TextType::class, [
                 'constraints' => [
                     new NotBlank(),
-                    new Length(['min' => 3, 'max' => 32])
+                    new Length(['min' => 100])
                 ]
             ])
             ->add('price', MoneyType::class, [
+                'currency' => 'PLN',
+                'divisor' => 100,
                 'constraints' => [
                     new NotBlank(),
                     new GreaterThan(0)

@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Add Product{% endblock %}
+
 {% block body %}
-<h1>Add Product</h1>
-    {{ form(addProductForm) }}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Add Product</h1>
+            {{ form(addProductForm) }}
+        </div>
+    </div>
 {% endblock %}

@@ -36,25 +36,25 @@ class AddProductAction
         $form = $this->formFactory->create(AddProductForm::class, new ProductDetails());
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var ProductDetails $details */
-            $details = $form->getData();
-
-            $productId = Uuid::uuid4();
-
-            $this->commandBus->dispatch(
-                new AddProduct(
-                    $productId,
-                    $details->name,
-                    $details->description,
-                    $details->price,
-                    $details->currency
-                )
-            );
-
-//            return $this->responder->redirectToList();
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            return $this->responder->renderForm($form->createView());
         }
 
-        return $this->responder->renderForm($form->createView());
+        /** @var ProductDetails $details */
+        $details = $form->getData();
+
+        $productId = Uuid::uuid4();
+
+        $this->commandBus->dispatch(
+            new AddProduct(
+                $productId,
+                $details->name,
+                $details->description,
+                (int)$details->price,
+                $details->currency
+            )
+        );
+//            return $this->responder->redirectToList();
+
     }
 }
