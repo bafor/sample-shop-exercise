@@ -7,10 +7,17 @@ use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 
 class ProductChangeEventSubscriber implements MessageSubscriberInterface
 {
+    /** @var ProductCreatedEmailSender */
+    private $emailSender;
+
+    public function __construct(ProductCreatedEmailSender $emailSender)
+    {
+        $this->emailSender = $emailSender;
+    }
 
     public function sendEmailOnMessageCreated(ProductCreated $productCreated): void
     {
-        var_dump('product.created');die();
+        $this->emailSender->notifyAboutNewProduct($productCreated->productId());
     }
 
     public static function getHandledMessages(): iterable

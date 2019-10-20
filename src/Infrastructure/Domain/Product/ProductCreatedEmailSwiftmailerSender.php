@@ -3,7 +3,7 @@
 namespace App\Infrastructure\Domain\Product;
 
 use App\Domain\Product\Email\ProductCreatedEmailSender;
-use App\Domain\Product\Event\ProductCreated;
+use Ramsey\Uuid\UuidInterface;
 
 class ProductCreatedEmailSwiftmailerSender implements ProductCreatedEmailSender
 {
@@ -15,15 +15,16 @@ class ProductCreatedEmailSwiftmailerSender implements ProductCreatedEmailSender
         $this->mailer = $mailer;
     }
 
-    public function __invoke(ProductCreated $productCreated): void
+    public function notifyAboutNewProduct(UuidInterface $productId): void
     {
         $this->mailer->send(
-            (new \Swift_Message('New product added'))
+            (new \Swift_Message('New product added: ' . $productId->toString()))
                 ->setFrom('send@example.com')
                 ->setTo('fake@example.com')
                 ->setBody(
-                    'Creating email and rendering message, body should be'
-                    . ' move to another class, but it\'s just simple exercise'
+                    'Creating email and rendering message body should be'
+                    . ' move to another class, but it\'s just simple exercise...'
+
                 )
         );
     }

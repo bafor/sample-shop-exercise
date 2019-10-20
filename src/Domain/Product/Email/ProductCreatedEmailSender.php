@@ -3,8 +3,9 @@
 namespace App\Domain\Product\Email;
 
 use App\Domain\Product\Event\ProductCreated;
+use Ramsey\Uuid\UuidInterface;
 
 interface ProductCreatedEmailSender
 {
-    public function __invoke(ProductCreated $productCreated): void;
+    public function notifyAboutNewProduct(UuidInterface $productId): void;
 }

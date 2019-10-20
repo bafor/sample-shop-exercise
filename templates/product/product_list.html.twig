@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product List{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Products</h1>
+
+            <table class="table">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+                {# @var product \App\Application\Query\Product\ViewModel\Product #}
+                {% for product in products %}
+
+                    <tr>
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.price }} {{ product.currency }}</td>
+                    </tr>
+
+                {% else %}
+                    <tr>
+                        <td colspan="4">Nie znaleziono produktow</td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+
+
+        </div>
+    </div>
+{% endblock %}
