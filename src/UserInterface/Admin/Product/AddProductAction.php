@@ -54,7 +54,7 @@ class AddProductAction
                 $details->currency
             )
         );
-//            return $this->responder->redirectToList();
 
+        return $this->responder->redirectToList();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\UserInterface\Product\Responder;
 
-use Symfony\Component\Form\FormView;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
@@ -16,9 +16,11 @@ class ProductListResponder
         $this->engine = $engine;
     }
 
-    public function listProducts(array $products): Response
+    public function listProducts(PaginationInterface $products): Response
     {
-        return new Response($this->engine->render('product/product_list.html.twig', ['products' => $products]));
+        return new Response(
+            $this->engine->render('product/product_list.html.twig', ['products' => $products])
+        );
     }
 
 }

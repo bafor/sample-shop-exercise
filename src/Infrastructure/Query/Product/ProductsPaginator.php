@@ -3,40 +3,32 @@
 namespace App\Infrastructure\Query\Product;
 
 use App\Application\Query\Product\Products;
-use App\Application\Query\Product\ViewModel\Product;
-use App\UserInterface\Product\ProductList;
-use Doctrine\DBAL\Driver\Connection;
-use Doctrine\DBAL\FetchMode;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 
-class ProductsPaginator implements Products
+class ProductsPaginator
 {
-    /** @var Connection */
-    private $connection;
+    /** @var int  */
+    private const LIMIT_PER_PAGE = 2;
 
-    public function __construct(ProductList $productList)
+    /** @var Products */
+    private $productList;
+    /** @var PaginatorInterface */
+    private $paginator;
+
+    public function __construct(Products $productList, PaginatorInterface $pagination)
     {
-        $this->connection = $connection;
+        $this->productList = $productList;
+        $this->paginator   = $pagination;
     }
 
-    /**
-     * @param int $page
-     * @param int $limit
-     * @return \App\Application\Query\Product\ViewModel\Product[]
-     */
-    public function productList(): array
+    public function productList(Request $request): PaginationInterface
     {
-        $sql  = <<<SQL
-        SELECT id, name, description, price, currency FROM shop_product
-        ORDER BY id desc
-SQL;
-        $stmt = $this->connection->prepare($sql);
-        $stmt->execute();
-
-        return array_map(
-            function (array $row): Product {
-                return new Product(... $row);
-            },
-            $stmt->fetchAll(FetchMode::NUMERIC)
+        return $this->paginator->paginate(
+            $this->productList->productList(),
+            $request->query->getInt('page', 1),
+            self::LIMIT_PER_PAGE
         );
     }
 

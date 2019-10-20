@@ -4,6 +4,7 @@ namespace App\Domain\Product;
 
 use App\Domain\Product\Properties\ProductDescription;
 use App\Domain\Product\Properties\ProductName;
+use App\Domain\Product\Properties\ProductPrice;
 use Ramsey\Uuid\UuidInterface;
 
 class Product
@@ -11,17 +12,14 @@ class Product
     /** @var UuidInterface */
     private $id;
 
-    /** @var string */
+    /** @var ProductName */
     private $name;
 
-    /** @var string */
+    /** @var ProductDescription */
     private $description;
 
-    /** @var int */
+    /** @var ProductPrice */
     private $price;
-
-    /** @var string */
-    private $currency;
 
     /** @var \DateTimeImmutable */
     private $createdAt;
@@ -30,27 +28,34 @@ class Product
         UuidInterface $id,
         ProductName $name,
         ProductDescription $description,
-        int $price,
-        string $currency
+        ProductPrice $price
     )
     {
         $this->id          = $id;
-        $this->name        = $name->name();
-        $this->description = $description->description();
+        $this->name        = $name;
+        $this->description = $description;
         $this->price       = $price;
-        $this->currency    = $currency;
 
         $this->createdAt = new \DateTimeImmutable();
     }
 
+    public function id(): UuidInterface
+    {
+        return $this->id;
+    }
+
     public function name(): ProductName
     {
-        return new ProductName($this->name);
+        return $this->name;
     }
 
     public function description(): ProductDescription
     {
-        return new ProductDescription($this->description);
+        return $this->description;
     }
 
+    public function price(): ProductPrice
+    {
+        return $this->price;
+    }
 }

@@ -6,15 +6,16 @@ App\Domain\Product\Product:
         id:
             type: uuid
     fields:
-        name:
-            type: string
-        description:
-            type: string
-            length: 2000
-        price:
-            type: integer
-        currency:
-            type: string
-            length: 5
         createdAt:
             type: datetime_immutable
+
+    embedded:
+        name:
+            class: App\Domain\Product\Properties\ProductName
+            columnPrefix: false
+        description:
+            class: App\Domain\Product\Properties\ProductDescription
+            columnPrefix: false
+        price:
+            class: App\Domain\Product\Properties\ProductPrice
+            columnPrefix: false

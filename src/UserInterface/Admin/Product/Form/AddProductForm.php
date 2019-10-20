@@ -6,6 +6,7 @@ use App\UserInterface\Admin\Product\Form\Model\ProductDetails;
 use Symfony\Component\Form\Extension\Core\Type\BaseType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,7 +26,7 @@ class AddProductForm extends BaseType
                     new Length(['min' => 3, 'max' => 32])
                 ]
             ])
-            ->add('description', TextType::class, [
+            ->add('description', TextareaType::class, [
                 'constraints' => [
                     new NotBlank(),
                     new Length(['min' => 100])

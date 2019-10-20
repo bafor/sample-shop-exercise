@@ -3,20 +3,23 @@
 namespace App\Application\Command\Product;
 
 use App\Domain\Product\Event\ProductCreated;
+use App\Domain\Product\Product;
+use App\Domain\Product\ProductPersister;
 use App\Domain\Product\Properties\ProductDescription;
 use App\Domain\Product\Properties\ProductName;
+use App\Domain\Product\Properties\ProductPrice;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 class AddProductHandler implements MessageHandlerInterface
 {
-    /** @var \App\Domain\Product\ProductPersister */
+    /** @var ProductPersister */
     private $persister;
     /** @var MessageBusInterface */
     private $eventBus;
 
     public function __construct(
-        \App\Domain\Product\ProductPersister $persister,
+        ProductPersister $persister,
         MessageBusInterface $eventBus
     )
     {
@@ -27,12 +30,14 @@ class AddProductHandler implements MessageHandlerInterface
     public function __invoke(AddProduct $product)
     {
         $this->persister->save(
-            new \App\Domain\Product\Product(
+            new Product(
                 $product->id(),
                 new ProductName($product->name()),
                 new ProductDescription($product->description()),
-                $product->price(),
-                $product->currency()
+                new ProductPrice(
+                    $product->price(),
+                    $product->currency()
+                )
             )
         );
 

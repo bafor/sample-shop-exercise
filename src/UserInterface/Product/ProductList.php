@@ -2,31 +2,31 @@
 
 namespace App\UserInterface\Product;
 
-use App\Infrastructure\Query\Product\ProductsDbalRepository;
+use App\Infrastructure\Query\Product\ProductsPaginator;
 use App\UserInterface\Product\Responder\ProductListResponder;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProductList
 {
-
-    /** @var ProductsDbalRepository */
-    private $dbalRepository;
     /** @var ProductListResponder */
     private $responder;
+    /** @var ProductsPaginator */
+    private $products;
 
     public function __construct(
-        ProductsDbalRepository $dbalRepository,
+        ProductsPaginator $products,
         ProductListResponder $responder
     )
     {
-        $this->dbalRepository = $dbalRepository;
-        $this->responder      = $responder;
+        $this->responder = $responder;
+        $this->products  = $products;
     }
 
-    public function __invoke(): Response
+    public function __invoke(Request $request): Response
     {
         return $this->responder->listProducts(
-            $this->dbalRepository->productList(1, 1)
+            $this->products->productList($request)
         );
     }
 

@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Domain\Product;
 
-use App\Domain\Product\Email\ProductCreatedEmailSender;
+use App\Domain\Product\Notification\ProductCreatedEmailSender;
 use Ramsey\Uuid\UuidInterface;
 
 class ProductCreatedEmailSwiftmailerSender implements ProductCreatedEmailSender

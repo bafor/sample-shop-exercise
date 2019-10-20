@@ -1,0 +1,5 @@
+App\Domain\Product\Properties\ProductName:
+    type: embeddable
+    fields:
+        name:
+            type: string

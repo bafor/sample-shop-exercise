@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Product\Email;
+namespace App\Domain\Product\Notification;
 
 use App\Domain\Product\Event\ProductCreated;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
