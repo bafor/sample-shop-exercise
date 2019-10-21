@@ -1,7 +1,7 @@
 # sample-shop-exercise
 
 Spis treści:
-- [Treść zadania](https://github.com/bafor/sample-shop-exercise/tree/dokumentacja#tresc-zadania)
+- [Treść zadania](https://github.com/bafor/sample-shop-exercise/tree/dokumentacja#treść-zadania)
 - [Moje uwagi do wykonania](https://github.com/bafor/sample-shop-exercise/tree/dokumentacja#moje-uwagi-do-wykonania)
 
 ## Treść zadania
